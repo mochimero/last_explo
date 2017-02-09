@@ -12,9 +12,6 @@ NEISCC<-merge(NEI,SCC,by="SCC")
 cutoff<-1e16
 NEISCC.filtered<-filter(NEISCC,Emissions<cutoff)
 NEISCC.filtered<-filter(NEISCC.filtered,Emissions!=0)
-#boxplot(Emissions ~ year, NEISCC.filtered,log="y")
-
-#NEISCC.tbl<-tbl_df(NEISCC)
 
 
 # Questions
@@ -94,12 +91,15 @@ for (i in c(1999,2002,2005,2008)){
 names(summary.Baltimore)<-c("Emissions","Year","Source")
 
 g<-ggplot(data=summary.Baltimore,aes(x=Year,y=Emissions))
-g+geom_line()+facet_grid(.~Source)+theme_bw()+labs(x="years",y="PM2.5 emissions per year in TONS")+ggtitle("Emissions in Baltimore City per source type between 1999 and 2008")
+g<-g+geom_line()+facet_grid(.~Source)+theme_bw()
+g<-g+labs(x="years",y="PM2.5 emissions per year in TONS")
+g<-g+ggtitle("Emissions in Baltimore City per source type between 1999 and 2008")
 
 ggsave("question3.png",height=5,width=10)
 
 g<-ggplot(data=summary.Baltimore,aes(x=Year,y=Emissions,color=Source))
-g+geom_line()+theme_bw()+labs(x="years",y="PM2.5 emissions per year in TONS")+ggtitle("Emissions in Baltimore City per source type between 1999 and 2008")
+g<-g+geom_line()+theme_bw()+labs(x="years",y="PM2.5 emissions per year in TONS")
+g<-g+ggtitle("Emissions in Baltimore City per source type between 1999 and 2008")
 ggsave("question3plus.png",height=5,width=10)
 #print(g)
 #dev.off()
@@ -119,7 +119,8 @@ for (i in years){
 
 names(coalUSperyear)<-c("year","Emissions")
 gUS<-ggplot(data=coalUSperyear,aes(x=year,y=Emissions))
-gUS+geom_line()+theme_bw()+labs(x="years",y="PM2.5 emissions per year in TONS")+ggtitle("Emissions in the US between 1999 and 2008 from Coal combustion-related sources")
+gUS<-gUS+geom_line()+theme_bw()+labs(x="years",y="PM2.5 emissions per year in TONS")
+gUS<-gUS+ggtitle("Emissions in the US between 1999 and 2008 from Coal combustion-related sources")
 ggsave("question4.png",height=5,width=10)
 
 
